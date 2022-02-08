@@ -18,3 +18,5 @@ ALTER TABLE progress
 ALTER TABLE progress
   ADD FOREIGN KEY (doc_ser, doc_num)
     REFERENCES students (doc_ser, doc_num);
+
+INSERT INTO students VALUES (98765, 'Ivanov Ivan', 0435, 029333);

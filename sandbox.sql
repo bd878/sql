@@ -1,15 +1,7 @@
-SELECT
-  flight_no,
-  departure_city,
-  arrival_city
-FROM routes
-WHERE departure_city IN (
-    SELECT city
-    FROM airports
-    WHERE timezone ~ 'Krasnoyarsk'
-  )
-AND arrival_city IN (
-    SELECT city
-    FROM airports
-    WHERE timezone ~ 'Krasnoyarsk'
-  );
+SELECT city, airport_name, coordinates[0] 
+FROM airports
+WHERE coordinates[0]::numeric IN (
+  (SELECT min(coordinates[0]::numeric) FROM airports),
+  (SELECT max(coordinates[0]::numeric) FROM airports)
+)
+ORDER BY coordinates[0]::numeric;

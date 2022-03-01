@@ -1,7 +1,10 @@
-SELECT city, airport_name, coordinates[0] 
-FROM airports
-WHERE coordinates[0]::numeric IN (
-  (SELECT min(coordinates[0]::numeric) FROM airports),
-  (SELECT max(coordinates[0]::numeric) FROM airports)
-)
-ORDER BY coordinates[0]::numeric;
+SELECT DISTINCT a.city
+  FROM airports a
+  WHERE NOT EXISTS (
+      SELECT *
+        FROM routes r
+        WHERE r.departure_city = 'Москва'
+          AND r.arrival_city = a.city
+    )
+    AND a.city <> 'Москва'
+  ORDER BY city;

@@ -1,4 +1,6 @@
+WITH ds AS
+  ( SELECT DISTINCT city FROM airports )
 SELECT count(*)
-  FROM ( SELECT DISTINCT city FROM airports ) AS a1
-  JOIN ( SELECT DISTINCT city FROM airports ) AS a2
-  ON a1.city <> a2.city;
+  FROM ds AS ds1
+  JOIN ds AS ds2
+  ON ds1.city <> ds2.city;

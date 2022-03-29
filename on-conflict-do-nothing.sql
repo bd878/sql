@@ -4,10 +4,10 @@ WITH add_row AS
   ON CONFLICT DO NOTHING
   RETURNING *
 ) INSERT INTO aircrafts_log
+    ( aircraft_code, model, range, operation )
     SELECT
       add_row.aircraft_code,
       add_row.model,
       add_row.range,
-      CURRENT_TIMESTAMP,
       'INSERT'
     FROM add_row;

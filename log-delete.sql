@@ -4,6 +4,6 @@ WITH delete_row AS
     RETURNING *
 )
 INSERT INTO aircrafts_log
-  SELECT dr.aircraft_code, dr.model, dr.range,
-    CURRENT_TIMESTAMP, 'DELETE'
+  ( aircraft_code, model, range, operation )
+  SELECT dr.aircraft_code, dr.model, dr.range, 'DELETE'
   FROM delete_row dr;

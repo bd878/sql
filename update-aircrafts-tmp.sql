@@ -4,8 +4,8 @@ WITH update_row AS
   RETURNING *
 )
 INSERT INTO aircrafts_log
-  SELECT ur.aircraft_code, ur.model, ur.range,
-    CURRENT_TIMESTAMP, 'UPDATE'
+  ( aircraft_code, model, range, operation )
+  SELECT ur.aircraft_code, ur.model, ur.range, 'UPDATE'
   FROM update_row ur;
 
 SELECT * FROM aircrafts_log

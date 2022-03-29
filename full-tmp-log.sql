@@ -3,10 +3,10 @@ WITH add_row AS
   SELECT * FROM aircrafts
   RETURNING *
 ) INSERT INTO aircrafts_log
+    ( aircraft_code, model, range, operation )
     SELECT
       ar.aircraft_code,
       ar.model,
       ar.range,
-      CURRENT_TIMESTAMP,
       'INSERT'
     FROM add_row ar;
